@@ -26,9 +26,11 @@ const ValidateTokenForm = () => {
         try {
 
             const response = await api.post("/auth/validate-recovery-code/", dataRequest)
-            console.log(response);
             
             if (response.status === 200) {
+                sessionStorage.setItem("code", data.code)
+                localStorage.setItem("token", response.data.temporary_token)
+                sessionStorage.removeItem("email")
                 navigate("/new-password")
             }
 

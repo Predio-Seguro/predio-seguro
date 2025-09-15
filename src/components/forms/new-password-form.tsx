@@ -1,20 +1,35 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import type { NewPasswordRequest } from "../../@types/auth";
+import type { NewPasswordForm, NewPasswordRequest } from "../../@types/auth";
 import api from "../../service/api";
 
 const NewPasswordForm = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<NewPasswordRequest>();
+    const { register, handleSubmit, formState: { errors } } = useForm<NewPasswordForm>();
     const [ errorMessage, setErrorMessage ] = useState("")
     const navigate = useNavigate()
 
-    const onSubmit = async (data: NewPasswordRequest) => {
+    const onSubmit = async (data: NewPasswordForm) => {
+
+        const code = sessionStorage.getItem("code")
+        const token = localStorage.getItem("token")
+
+        if (!code) return
+
+        const newPasswordRequest: NewPasswordRequest = {
+            confirm_new_password: data.confirm_new_password,
+            new_password: data.new_password,
+            code: code
+        } 
 
         try {
 
-            const response = await api.post("/auth/recovery-password/", data)
+            const response = await api.patch("/auth/recovery-password/", newPasswordRequest, {
+                headers: {
+                    'Authorization': `${token}`
+                }
+            })
             if (response.status === 200) {
                 navigate("/")
             }
