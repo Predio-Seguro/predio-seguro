@@ -6,3 +6,12 @@ export interface LoginRequest {
 export interface SendEmailRecorevyPasswordRequest {
     email: string
 }
+
+export interface ValidateRecoveryTokenForm {
+    code: string,
+}
+
+export interface ValidateRecoveryTokenRequest {
+    code: string,
+    email: string
+}

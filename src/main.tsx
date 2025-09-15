@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LoginPage from './routes/login-page.tsx'
 import HomePage from './routes/home-page.tsx'
 import SendEmailRecoveryPasswordPage from './routes/recovery-password-page.tsx'
+import ValidateTokenPage from './routes/validate-token-page.tsx'
+import NewPasswordPage from './routes/new-password-page.tsx'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,15 @@ const router = createBrowserRouter([
       {
         path: "/email-recovery-password",
         element: <SendEmailRecoveryPasswordPage />
+      },
+      {
+        path: "/validate-token",
+        element: <ValidateTokenPage />
+
+      },
+      {
+        path: "/new-password",
+        element: <NewPasswordPage />
       },
       {
         path: "/home",
