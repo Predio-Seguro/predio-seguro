@@ -5,6 +5,7 @@ import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LoginPage from './routes/login-page.tsx'
 import HomePage from './routes/home-page.tsx'
+import SendEmailRecoveryPasswordPage from './routes/recovery-password-page.tsx'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "home",
+        path: "/email-recovery-password",
+        element: <SendEmailRecoveryPasswordPage />
+      },
+      {
+        path: "/home",
         element: <HomePage />
       }
     ]
