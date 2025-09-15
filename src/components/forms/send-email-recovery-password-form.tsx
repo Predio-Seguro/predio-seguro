@@ -13,8 +13,6 @@ const SendEmailRecoveryPasswordForm = () => {
   const navigate = useNavigate()
 
   const onSubmit = async (data: SendEmailRecorevyPasswordRequest) => {
-
-    console.log(data);
     
     try {
 
