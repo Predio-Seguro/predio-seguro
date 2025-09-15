@@ -15,3 +15,8 @@ export interface ValidateRecoveryTokenRequest {
     code: string,
     email: string
 }
+
+export interface NewPasswordRequest {
+    new_password: string,
+    confirm_new_password: string
+}
