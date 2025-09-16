@@ -1,6 +1,10 @@
+import HeaderHome from "../components/header-home"
+
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <HeaderHome />
+    </div>
   )
 }
 
