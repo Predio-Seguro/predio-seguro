@@ -53,7 +53,7 @@ const NewPasswordForm = () => {
                 <label className="flex flex-col gap-3">
                     <span className="text-2xl font-semibold">Nova Senha</span>
                     <input 
-                        type="text"
+                        type="password"
                         className="w-lg border p-4 rounded-[10px] shadow-[4px_4px_6px_rgba(0,0,0,0.2)]"
                         placeholder="Digite sua nova senha"
                         {...register("new_password", {
