@@ -36,7 +36,7 @@ const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
             {errorMessage && <span className="text-sm text-red-700 font-bold mb-6 uppercase">{errorMessage}</span>}
-            <div className="flex gap-5 mb-16">
+            <div className="flex gap-5 mb-16 max-2xl:mb-6">
                 <div className="flex flex-col gap-5">
                     <label className="flex flex-col gap-3">
                         <span className="text-2xl font-semibold">Nome</span>

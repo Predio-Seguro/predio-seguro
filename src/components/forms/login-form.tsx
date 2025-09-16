@@ -38,7 +38,7 @@ const LoginForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
             {errorMessage && <span className="text-sm text-red-700 font-bold mb-6 uppercase">{errorMessage}</span>}
-            <div className="flex flex-col gap-12 mb-2.5">
+            <div className="flex flex-col gap-12 max-2xl:gap-8 mb-2.5">
                 <label className="flex flex-col gap-3">
                     <span className="text-2xl font-semibold">Nome de Usuário</span>
                     <input 
@@ -72,7 +72,7 @@ const LoginForm = () => {
                     {errors.password && <span className="text-red-700 font-bold uppercase text-sm">{errors.password.message}</span>}
                 </label>
             </div>
-            <a href="/email-recovery-password" className="mb-16 w-full  text-left font-bold transition duration-500 text-[#2D68C3] hover:text-[#1B3E75]">Esqueceu a senha?</a>
+            <a href="/email-recovery-password" className="mb-16 max-2xl:mb-6 w-full  text-left font-bold transition duration-500 text-[#2D68C3] hover:text-[#1B3E75]">Esqueceu a senha?</a>
             <button className="w-96 h-16 mb-3 bg-[#2D68C3] text-center rounded-2xl font-extrabold text-white 
                             text-2xl cursor-pointer transition duration-500 hover:bg-[#1B3E75]" type="submit">Entrar</button>
             <p className="font-bold">Já possui uma conta? <a href="/register" className="mb-16 w-full text-left font-bold transition duration-500 text-[#2D68C3] hover:text-[#1B3E75]">cadastre-se</a></p>
