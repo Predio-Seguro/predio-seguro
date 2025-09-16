@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import type { NewPasswordForm, NewPasswordRequest } from "../../@types/auth";
+import type { NewPasswordInfosForm, NewPasswordRequest } from "../../@types/auth";
 import api from "../../service/api";
 
 const NewPasswordForm = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<NewPasswordForm>();
+    const { register, handleSubmit, formState: { errors } } = useForm<NewPasswordInfosForm>();
     const [ errorMessage, setErrorMessage ] = useState("")
     const navigate = useNavigate()
 
-    const onSubmit = async (data: NewPasswordForm) => {
+    const onSubmit = async (data: NewPasswordInfosForm) => {
 
         const code = sessionStorage.getItem("code")
         const token = localStorage.getItem("token")

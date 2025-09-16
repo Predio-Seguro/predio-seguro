@@ -31,7 +31,7 @@ export interface NewPasswordRequest {
     code: string
 }
 
-export interface NewPasswordForm{
+export interface NewPasswordInfosForm{
     new_password: string,
     confirm_new_password: string,
 }
