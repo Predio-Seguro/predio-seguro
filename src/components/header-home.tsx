@@ -1,9 +1,12 @@
+import { useState } from "react"
 import { useLocation } from "react-router-dom"
+import ProfileDialog from "./dialogs/profile-modal"
 
 const HeaderHome = () => {
 
   const location = useLocation()
   const pathName = location.pathname
+  const [ openProfileModal, setOpenProfileModal ] = useState(false)
 
   const linkClasses = (path: string) =>
     path === pathName 
@@ -18,7 +21,14 @@ const HeaderHome = () => {
             <li className={linkClasses("/order")}><a href="">Ordem de Serviço</a></li>
             <li className={linkClasses("/history")}><a href="">Histórico</a></li>
         </ul>
-        <button className="bg-white py-3 px-10 rounded-2xl text-[#1F4887] cursor-pointer font-bold">Perfil</button>
+        <div>
+          <button onClick={() => openProfileModal ? setOpenProfileModal(false) : setOpenProfileModal(true)} 
+                  className="bg-white py-3 px-10 rounded-2xl text-[#1F4887] cursor-pointer font-bold hover:bg-black hover:text-white transation duration-500">
+                  Perfil</button>
+          <div className="absolute right-5 mt-2">
+            {openProfileModal && <ProfileDialog />}
+          </div>
+        </div>
     </nav>
   )
 }
