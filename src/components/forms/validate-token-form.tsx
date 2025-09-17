@@ -65,8 +65,9 @@ const ValidateTokenForm = () => {
                 />
                 {errors.code && <span className="text-red-700 font-bold uppercase text-sm">{errors.code.message}</span>}  
             </label>
-            <button className="w-96 h-16 bg-[#2D68C3] text-center rounded-2xl font-extrabold text-white 
+            <button className="w-96 h-16 mb-3 bg-[#2D68C3] text-center rounded-2xl font-extrabold text-white 
                                     text-2xl cursor-pointer transition duration-500 hover:bg-[#1B3E75]" type="submit">Avançar</button>
+            <p className="font-bold">Lembrou da senha? <a href="/" className="mb-16 w-full text-left font-bold transition duration-500 text-[#2D68C3] hover:text-[#1B3E75]">entre</a></p>
         </form>
     )
 }

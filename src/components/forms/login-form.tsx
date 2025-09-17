@@ -75,7 +75,7 @@ const LoginForm = () => {
             <a href="/email-recovery-password" className="mb-16 max-2xl:mb-6 w-full  text-left font-bold transition duration-500 text-[#2D68C3] hover:text-[#1B3E75]">Esqueceu a senha?</a>
             <button className="w-96 h-16 mb-3 bg-[#2D68C3] text-center rounded-2xl font-extrabold text-white 
                             text-2xl cursor-pointer transition duration-500 hover:bg-[#1B3E75]" type="submit">Entrar</button>
-            <p className="font-bold">Já possui uma conta? <a href="/register" className="mb-16 w-full text-left font-bold transition duration-500 text-[#2D68C3] hover:text-[#1B3E75]">cadastre-se</a></p>
+            <p className="font-bold">Não possui uma conta? <a href="/register" className="mb-16 w-full text-left font-bold transition duration-500 text-[#2D68C3] hover:text-[#1B3E75]">cadastre-se</a></p>
         </form>
     )
 }
