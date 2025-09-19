@@ -11,7 +11,7 @@ const HeaderHome = () => {
 
   const linkClasses = (path: string) =>
     path === pathName 
-    ? "text-black border-b-4"
+    ? "text-black border-b-4 font-bold"
     : "transition duration-500 hover:text-black"
 
   // const getMeUser = async () => {
@@ -35,8 +35,8 @@ const HeaderHome = () => {
         <img src="logo-header.png" alt="" />
         <ul className="flex gap-20 text-2xl text-white font-semibold">
             <li className={linkClasses("/home")}><a href="/teams">Equipes</a></li>
-            <li className={linkClasses("/order")}><a href="">Ordem de Serviço</a></li>
-            <li className={linkClasses("/history")}><a href="">Histórico</a></li>
+            <li className={linkClasses("/orders")}><a href="/orders">Ordem de Serviço</a></li>
+            <li className={linkClasses("/history")}><a href="/history">Histórico</a></li>
         </ul>
         <div>
           <button onClick={() => openProfileDialog ? setOpenProfileDialog(false) : setOpenProfileDialog(true)} 
