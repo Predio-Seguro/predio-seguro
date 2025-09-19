@@ -1,17 +1,34 @@
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
-import ProfileDialog from "./dialogs/profile-modal"
+import ProfileDialog from "./dialogs/profile-dialog"
+import api from "../service/api"
 
 const HeaderHome = () => {
 
   const location = useLocation()
   const pathName = location.pathname
-  const [ openProfileModal, setOpenProfileModal ] = useState(false)
+  const [ openProfileDialog, setOpenProfileDialog ] = useState(false)
 
   const linkClasses = (path: string) =>
     path === pathName 
     ? "text-black border-b-4"
     : "transition duration-500 hover:text-black"
+
+  // const getMeUser = async () => {
+  //   const token = localStorage.getItem("token")
+
+  //   if (!token) return
+
+  //   const response = await api.get("/profile/me/", {
+  //     headers: {
+  //       'Authorization': `${token}`
+  //     }
+  //   })
+    
+  //   if (response.status === 200) {
+
+  //   }
+  // }
 
   return (
     <nav className="flex p-5 justify-between items-center bg-gradient-to-br from-[#5799FF] to-[#1F4887]">
@@ -22,11 +39,11 @@ const HeaderHome = () => {
             <li className={linkClasses("/history")}><a href="">Histórico</a></li>
         </ul>
         <div>
-          <button onClick={() => openProfileModal ? setOpenProfileModal(false) : setOpenProfileModal(true)} 
-                  className="bg-white py-3 px-10 rounded-2xl text-[#1F4887] cursor-pointer font-bold hover:bg-black hover:text-white transation duration-500">
-                  Perfil</button>
+          <button onClick={() => openProfileDialog ? setOpenProfileDialog(false) : setOpenProfileDialog(true)} 
+                  className="cursor-pointer">
+                  <img src="/profile.png" className="w-16 h-16" /></button>
           <div className="absolute right-5 mt-2">
-            {openProfileModal && <ProfileDialog />}
+            {openProfileDialog && <ProfileDialog />}
           </div>
         </div>
     </nav>
