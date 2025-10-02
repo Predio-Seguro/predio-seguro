@@ -19,7 +19,7 @@ const LoginForm = () => {
             const response = await api.post("/auth/login/", data)
             if (response.status === 200) {
                 localStorage.setItem("token", response.data.token)
-                navigate("/home")
+                navigate("/orders")
             }
 
         } catch (error: any) {

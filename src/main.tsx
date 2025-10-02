@@ -12,6 +12,7 @@ import RegisterPage from './routes/register-page.tsx'
 import ServiceOrderPage from './routes/service-order-page.tsx'
 import NewOrdersPage from './routes/new-order-page'
 import TeamsPage from './routes/teams-page'
+import HistoryPage from './routes/history-page'
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/teams",
         element: <TeamsPage />
+      },
+      {
+        path: "/history",
+        element: <HistoryPage />
       }
     ]
   }

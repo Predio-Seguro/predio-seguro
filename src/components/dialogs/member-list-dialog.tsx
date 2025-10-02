@@ -1,24 +1,27 @@
+import { useState, useEffect } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-export type Member = {
-  id: string;
+// Tipos definidos para corresponder à API
+type TeamMember = {
   name: string;
-  role: string;
+  position: string;
   contact: string;
 };
 
-export type Team = {
+type TeamDetail = {
   id: string;
   name: string;
   specialty: string;
-  status: "Ativo" | "Inativo";
-  members: Member[];
+  status: string;
+  status_display: string;
+  member: TeamMember[]; // A propriedade correta é 'member' (singular)
 };
+
 
 type MemberListDialogProps = {
   isOpen: boolean;
   onClose: () => void;
-  team: Team;
+  team: TeamDetail; // O tipo da prop agora é TeamDetail
 };
 
 const MemberListDialog = ({ isOpen, onClose, team }: MemberListDialogProps) => {
@@ -27,7 +30,8 @@ const MemberListDialog = ({ isOpen, onClose, team }: MemberListDialogProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
       <div className="bg-white w-full max-w-2xl p-8 rounded-xl shadow-2xl">
-        <h2 className="text-3xl font-bold text-center text-[#0D47A1] mb-6">Lista de Membros</h2>
+        <h2 className="text-3xl font-bold text-center text-[#0D47A1] mb-2">Membros da Equipe</h2>
+        <p className="text-center text-lg text-gray-600 mb-6">{team.name}</p>
         <div className="max-h-[60vh] overflow-y-auto border rounded-lg mb-6">
           <Table>
             <TableHeader>
@@ -38,11 +42,12 @@ const MemberListDialog = ({ isOpen, onClose, team }: MemberListDialogProps) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {team.members.length > 0 ? (
-                team.members.map(member => (
-                  <TableRow key={member.id}>
+              {/* CORREÇÃO: Usando team.member em vez de team.members */}
+              {team.member.length > 0 ? (
+                team.member.map((member, index) => (
+                  <TableRow key={index}>
                     <TableCell>{member.name}</TableCell>
-                    <TableCell>{member.role}</TableCell>
+                    <TableCell>{member.position}</TableCell>
                     <TableCell>{member.contact}</TableCell>
                   </TableRow>
                 ))
