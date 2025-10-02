@@ -28,10 +28,26 @@ const ServicesTable = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [orderToDelete, setOrderToDelete] = useState<ServiceOrder | null>(null);
 
+  // Função auxiliar para criar a configuração do header com o token
+  const getAuthConfig = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return {
+        headers: {
+          Authorization: token,
+        },
+      };
+    }
+    return {};
+  };
+
   const fetchServiceOrders = async () => {
     setIsLoading(true)
     try {
-      const response = await apiOrderService.get<ServiceOrder[]>("/service-orders/findAll")
+      const response = await apiOrderService.get<ServiceOrder[]>(
+        "/service-orders/findAll",
+        getAuthConfig() // Adiciona o header na requisição
+      );
       setServiceOrders(response.data)
     } catch (err) {
       console.error("Falha ao buscar ordens de serviço:", err)
@@ -59,7 +75,10 @@ const ServicesTable = () => {
     if (!orderToDelete) return;
 
     try {
-      await apiOrderService.delete(`/service-orders/delete/${orderToDelete.id}`)
+      await apiOrderService.delete(
+        `/service-orders/delete/${orderToDelete.id}`,
+        getAuthConfig() // Adiciona o header na requisição
+      );
       setServiceOrders(prevOrders => prevOrders.filter(order => order.id !== orderToDelete.id));
       closeDeleteModal();
     } catch (err) {
@@ -79,9 +98,11 @@ const ServicesTable = () => {
 
   const handleStatusChange = async (id: string, newStatus: ServiceOrder['statusOrder']) => {
     try {
-      await apiOrderService.patch(`/service-orders/update-status/${id}`, {
-        statusOrder: newStatus,
-      });
+      await apiOrderService.patch(
+        `/service-orders/update-status/${id}`,
+        { statusOrder: newStatus },
+        getAuthConfig() // Adiciona o header na requisição
+      );
       setServiceOrders(prevOrders =>
         prevOrders.map(order =>
           order.id === id ? { ...order, statusOrder: newStatus } : order
@@ -90,7 +111,6 @@ const ServicesTable = () => {
     } catch (err) {
       alert("Não foi possível atualizar o status.");
       console.error(err);
-      // Opcional: recarregar os dados para reverter a mudança visual
       fetchServiceOrders();
     }
   };
@@ -102,7 +122,11 @@ const ServicesTable = () => {
     const updatedOrder = { ...orderToUpdate, priority: newPriority };
 
     try {
-      await apiOrderService.put(`/service-orders/update/${id}`, updatedOrder);
+      await apiOrderService.put(
+        `/service-orders/update/${id}`,
+        updatedOrder,
+        getAuthConfig() // Adiciona o header na requisição
+      );
       setServiceOrders(prevOrders =>
         prevOrders.map(order =>
           order.id === id ? { ...order, priority: newPriority } : order
@@ -111,7 +135,6 @@ const ServicesTable = () => {
     } catch (err) {
       alert("Não foi possível atualizar a prioridade.");
       console.error(err);
-      // Opcional: recarregar os dados para reverter a mudança visual
       fetchServiceOrders();
     }
   };

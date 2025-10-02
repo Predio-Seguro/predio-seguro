@@ -34,7 +34,7 @@ const HeaderHome = () => {
     <nav className="flex p-5 justify-between items-center bg-gradient-to-br from-[#5799FF] to-[#1F4887]">
         <img src="logo-header.png" alt="" />
         <ul className="flex gap-20 text-2xl text-white font-semibold">
-            <li className={linkClasses("/home")}><a href="/teams">Equipes</a></li>
+            <li className={linkClasses("/teams")}><a href="/teams">Equipes</a></li>
             <li className={linkClasses("/orders")}><a href="/orders">Ordem de Serviço</a></li>
             <li className={linkClasses("/history")}><a href="/history">Histórico</a></li>
         </ul>
