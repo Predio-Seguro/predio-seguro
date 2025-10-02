@@ -7,4 +7,11 @@ const api = axios.create({
     }
 })
 
+export const apiOrderService = axios.create({
+    baseURL: import.meta.env.VITE_SERVICE_ORDER_API_URL,
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+
 export default api

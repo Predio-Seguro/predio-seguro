@@ -10,6 +10,7 @@ import ValidateTokenPage from './routes/validate-token-page.tsx'
 import NewPasswordPage from './routes/new-password-page.tsx'
 import RegisterPage from './routes/register-page.tsx'
 import ServiceOrderPage from './routes/service-order-page.tsx'
+import NewOrdersPage from './routes/new-order-page'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <ServiceOrderPage />
+      },
+      {
+        path: "/create-order",
+        element: <NewOrdersPage />
       }
     ]
   }

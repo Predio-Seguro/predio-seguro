@@ -11,7 +11,7 @@ const HeaderHome = () => {
 
   const linkClasses = (path: string) =>
     path === pathName 
-    ? "text-black border-b-4 font-bold"
+    ? "text-black border-b-4 border-black font-bold"
     : "transition duration-500 hover:text-black"
 
   // const getMeUser = async () => {
