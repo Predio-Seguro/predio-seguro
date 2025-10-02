@@ -132,10 +132,6 @@ const TeamsTable = () => {
       <div className="p-8">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-3xl font-bold">Equipes</h1>
-          <button onClick={() => navigate('/equipes/criar')} className="flex items-center gap-2 bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
-            <PlusCircle size={20} />
-            Criar Equipe
-          </button>
         </div>
         <div className="p-4 border rounded-lg shadow-md bg-white">
           <Table>

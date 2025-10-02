@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { apiOrderService } from "../../service/api";
+import { apiOrderService, apiTeams } from "../../service/api"; // Importando também a apiTeams
 import axios from "axios";
 
 type CreateServiceRequest = {
@@ -14,6 +14,7 @@ type CreateServiceRequest = {
 type Team = {
   id: string;
   name: string;
+  // A API pode retornar mais campos, mas para o dropdown 'id' e 'name' são suficientes
 };
 
 const CreateServiceForm = () => {
@@ -22,25 +23,44 @@ const CreateServiceForm = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const navigate = useNavigate();
 
+  // Função para adicionar os headers em todas as requisições
+  const getAuthConfig = () => {
+    const token = localStorage.getItem('token');
+    const headers: { [key: string]: string } = {
+      'ngrok-skip-browser-warning': 'true',
+    };
+    if (token) {
+      headers.Authorization = token;
+    }
+    return { headers };
+  };
+
   useEffect(() => {
+    // Função para buscar as equipes do backend
     const fetchTeams = async () => {
       try {
-        setTeams([
-          { id: "550e8400-e29b-41d4-a716-446655740000", name: "Equipe Alpha" },
-          { id: "f47ac10b-58cc-4372-a567-0e02b2c3d479", name: "Equipe Beta" },
-          { id: "a3d8c1b2-0e1a-4f5c-8a9d-3b4c5d6e7f80", name: "Equipe Gamma" },
-        ]);
+        const response = await apiTeams.get("/teams", getAuthConfig());
+        // Garante que a resposta seja um array antes de atualizar o estado
+        if (Array.isArray(response.data)) {
+            setTeams(response.data);
+        } else if (response.data && Array.isArray(response.data.content)) {
+            setTeams(response.data.content);
+        } else {
+            console.warn("A resposta da API de equipes não é um array:", response.data);
+            setTeams([]);
+        }
       } catch (error) {
         console.error("Erro ao buscar equipes:", error);
-        setErrorMessage("Não foi possível carregar as equipes.");
+        setErrorMessage("Não foi possível carregar as equipes. Verifique se a API está online.");
       }
     };
     fetchTeams();
-  }, []);
+  }, []); // O array vazio garante que a busca ocorra apenas uma vez
 
   const onSubmit = async (data: CreateServiceRequest) => {
     try {
-      const response = await apiOrderService.post("/service-orders/create", data);
+      // Adiciona a configuração de autenticação à requisição POST
+      const response = await apiOrderService.post("/service-orders/create", data, getAuthConfig());
       if (response.status === 201) {
         navigate("/orders"); 
       }
@@ -148,4 +168,4 @@ const CreateServiceForm = () => {
   );
 };
 
-export default CreateServiceForm;   
+export default CreateServiceForm;

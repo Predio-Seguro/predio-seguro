@@ -41,7 +41,7 @@ const HistoryTable = () => {
   return { headers };
 };  
 
-  const fetchHistory = async (url = "/service-order") => {
+  const fetchHistory = async (url = "/history") => {
     setIsLoading(true);
     try {
       const response = await apiHistory.get(url, getAuthConfig());
@@ -62,14 +62,14 @@ const HistoryTable = () => {
   }, []);
   
   const handleFilter = () => {
-    let filterUrl = "/service-order";
+    let filterUrl = "/history";
 
     if (teamFilter) {
-      filterUrl = `/service-order/equip/${teamFilter}`;
+      filterUrl = `/history/equip/${teamFilter}`;
     } else if (locationFilter) {
-      filterUrl = `/service-order/location/${locationFilter}`;
+      filterUrl = `/history/location/${locationFilter}`;
     } else if (dateFilter) {
-      filterUrl = `/service-order/date/${dateFilter}`;
+      filterUrl = `/history/date/${dateFilter}`;
     }
     
     fetchHistory(filterUrl);

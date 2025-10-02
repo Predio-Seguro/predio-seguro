@@ -9,7 +9,7 @@ import {
 import { Pencil, Trash2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { apiOrderService } from "@/service/api"
+import { apiOrderService, apiHistory } from "@/service/api"
 
 type ServiceOrder = {
   id: string
@@ -106,6 +106,11 @@ const ServicesTable = () => {
             },
             getAuthConfig()
         );
+        await apiHistory.get(
+            `/history/save`,
+            getAuthConfig()
+        );
+        
         setServiceOrders(prevOrders =>
             prevOrders.map(order =>
                 order.id === orderId ? { ...order, statusOrder: newStatus } : order
@@ -192,7 +197,6 @@ const ServicesTable = () => {
                   <TableCell>{new Date(order.creationDate).toLocaleDateString("pt-BR")}</TableCell>
                   <TableCell>{order.teamID}</TableCell>
                   <TableCell className="flex gap-2 justify-end">
-                    <button onClick={() => handleEdit(order)} className="p-1 hover:bg-gray-100 rounded"><Pencil className="h-4 w-4 text-blue-600" /></button>
                     <button onClick={() => openDeleteModal(order)} className="p-1 hover:bg-gray-100 rounded"><Trash2 className="h-4 w-4 text-red-600" /></button>
                   </TableCell>
                 </TableRow>
